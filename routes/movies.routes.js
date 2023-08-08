@@ -32,7 +32,6 @@ try {
 }
 });
 
-
 // GET => Pasamos solo la vista de la lista de peliculas
 router.get("/", async (req, res, next) => {
     try {
@@ -42,6 +41,8 @@ router.get("/", async (req, res, next) => {
         next(error)
     }
 })
+
+// GET => Ver los detalles pelicula mediante una id dinamica
 router.get("/:movieId", async(req, res, next) => {
     const { movieId } = req.params
     try {
@@ -53,5 +54,15 @@ router.get("/:movieId", async(req, res, next) => {
     }
 })
 
-
+// POST => Borrar pelicula
+router.post("/:movieId/delete", async (req, res, next) => {
+    const { movieId } = req.params
+    try {
+        
+        await Movie.findByIdAndDelete(movieId)
+        res.redirect("/movies")
+    } catch (error) {
+        next(error)
+    }
+})
 module.exports = router;

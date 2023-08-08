@@ -11,4 +11,8 @@
         <li>Mytic Phrase: {{this.catchPhrase}}</li>
     </ul>
     {{/each}}
+    <form action="/movies/{{this.movie._id}}/delete" method="post">
+        <button>Borrar</button>
+    </form>
+        <button>Modificar</button>
 </div>
