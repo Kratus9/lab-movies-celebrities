@@ -1,10 +1,10 @@
-<h2>Details of: {{movie.title}}</h2>
+<h2>Details of: {{this.movie.title}}</h2>
 
 <div>
-    <p>Genre: {{movie.genre}}</p>
-    <p>Plot: {{movie.plot}}</p>
+    <p>Genre: {{this.movie.genre}}</p>
+    <p>Plot: {{this.movie.plot}}</p>
     <p>Cast: </p>
-    {{#each movie.cast}}
+    {{#each this.movie.cast}}
     <ul>
         <h6>Name: {{this.name}}</h6>
         <li>Occupation: {{this.occupation}}</li>
@@ -14,5 +14,7 @@
     <form action="/movies/{{this.movie._id}}/delete" method="post">
         <button>Borrar</button>
     </form>
-        <button>Modificar</button>
+        
+        <a href="/movies/{{this.movie._id}}/edit">
+        <button>Modificar</button></a>
 </div>

@@ -65,4 +65,33 @@ router.post("/:movieId/delete", async (req, res, next) => {
         next(error)
     }
 })
+
+// GET => Pasamos la vista del editor de peliculas
+router.get("/:movieId/edit", async (req, res, next) => {
+    const { movieId } = req.params
+    try {
+        
+        const movie = await Movie.findById(movieId)
+        const allCelebrities = await Celebrity.find()
+        res.render("movies/edit-movie.hbs", { movie, allCelebrities })
+    } catch (error) {
+        next(error)
+    }
+})
+
+//POST => Realizar los cambios efectuados por el cliente sobre la pelicula
+router.post("/:movieId/edit", async (req, res, next) => {
+    const { movieId } = req.params
+    const { title, genre, plot, cast } = req.body
+    try {
+        
+        await Movie.findByIdAndUpdate(movieId, { title, genre, plot, cast })
+        res.redirect(`/movies/${movieId}`)
+    } catch (error) {
+        next(error)
+    }
+})
+
+
+
 module.exports = router;
