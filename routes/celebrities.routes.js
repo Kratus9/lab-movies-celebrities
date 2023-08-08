@@ -31,5 +31,54 @@ router.get("/", async (req, res, next) => {
     }
 })
 
+// GET => Pasar vista de detalles celebrity
+router.get("/:celebrityId", async(req, res, next) => {
+    const { celebrityId } = req.params
+    try {
+        
+        const celebrity = await Celebrity.findById(celebrityId)
+        res.render("celebrities/celebrity-details.hbs", { celebrity })
+    } catch (error) {
+        next(error)
+    }
+})
+
+// POST => Borrar celebrity
+router.post("/:celebrityId/delete", async (req, res, next) => {
+    const { celebrityId } = req.params
+    try {
+        
+        await Celebrity.findByIdAndDelete(celebrityId)
+        res.redirect("/celebrities")
+    } catch (error) {
+        next(error)
+    }
+})
+
+// GET => Pasamos la vista del editor de celebrities
+router.get("/:celebrityId/edit", async (req, res, next) => {
+    const { celebrityId } = req.params
+    try {
+        
+        const celebrity = await Celebrity.findById(celebrityId)
+        res.render("celebrities/edit-celebrity.hbs", { celebrity })
+    } catch (error) {
+        next(error)
+    }
+})
+
+// POST => Pasamos los cambios efectuados por el cliente sobre la celebrity
+router.post("/:celebrityId/edit", async (req, res, next) => {
+    const { celebrityId } = req.params
+    const { name, occupation, catchPhrase } = req.body
+    try {
+        
+        await Celebrity.findByIdAndUpdate(celebrityId, { name, occupation, catchPhrase })
+        res.redirect(`/celebrities/${celebrityId}`)
+    } catch (error) {
+        next(error)
+    }
+})
+
 
 module.exports = router;

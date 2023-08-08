@@ -1,0 +1,13 @@
+<h2>Details of: {{this.celebrity.name}}</h2>
+
+<div>
+    <p>Occupation: {{this.celebrity.occupation}}</p>
+    <p>Mytic Phrase: {{this.celebrity.catchPhrase}}</p>
+    
+    <form action="/celebrities/{{this.celebrity._id}}/delete" method="post">
+        <button>Borrar</button>
+    </form>
+        
+        <a href="/celebrities/{{this.celebrity._id}}/edit">
+        <button>Modificar</button></a>
+</div>

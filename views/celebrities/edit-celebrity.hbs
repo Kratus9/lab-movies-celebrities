@@ -1,0 +1,21 @@
+<div>
+
+  <h3>Editar Celebrity</h3>
+
+  <div>
+    <form action="/celebrities/{{this.celebrity._id}}/edit" method="post">
+      <label for="name">Name</label>
+      <input type="text" name="name" value="{{this.celebrity.name}}"/>
+      <br />
+      <label for="occupation">Occupation</label>
+      <input type="text" name="occupation" value="{{this.celebrity.occupation}}"/>
+      <br />
+      <label for="catchPhrase">Mytic Phrase</label>
+      <input type="text" name="catchPhrase" value="{{this.celebrity.catchPhrase}}"/>
+      <br />
+        
+            <button>Guardar cambios</button>
+
+    </form>
+  </div>
+</div>
