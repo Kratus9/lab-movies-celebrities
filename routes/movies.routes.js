@@ -33,5 +33,25 @@ try {
 });
 
 
+// GET => Pasamos solo la vista de la lista de peliculas
+router.get("/", async (req, res, next) => {
+    try {
+        const allMovies = await Movie.find()
+        res.render("movies/movies.hbs", { allMovies })
+    } catch (error) {
+        next(error)
+    }
+})
+router.get("/:movieId", async(req, res, next) => {
+    const { movieId } = req.params
+    try {
+        
+        const movie = await Movie.findById(movieId).populate("cast")
+        res.render("movies/movie-details.hbs", { movie })
+    } catch (error) {
+        next(error)
+    }
+})
+
 
 module.exports = router;
